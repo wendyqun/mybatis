@@ -15,7 +15,7 @@
             <transactionManager type="JDBC">
                 <property name="" value=""></property>
             </transactionManager>
-            <dataSource type="UNPOOLED">
+            <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
                 <property name="username" value="root"/>
