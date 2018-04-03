@@ -403,4 +403,140 @@ public class UserMapperTest extends BaseMapperTest {
             sqlSession.close();
         }
     }
+
+    //只允许查询一条，如果有多条符合条件的话会报错。
+    //通过sql 自动映射到对应的对象上，使用 resultType 映射。
+    @Test
+    public void testSelectUserAndRoleById(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            SysUser user=userMapper.selectUserAndRoleById(1001l);
+            System.out.println(user.getRole().getRoleName());
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    //只允许查询一条，如果有多条符合条件的话会报错。
+    //通过sql 自动映射到对应的对象上，使用 resultMap 映射。resultMap继承,注意返回类型为SysUser
+    @Test
+    public void testSelectUserAndRoleById2(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            SysUser user=userMapper.selectUserAndRoleById2(1001l);
+            System.out.println(user.getRole().getRoleName());
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    //只允许查询一条，如果有多条符合条件的话会报错。
+    //使用association标签配置一对一
+    @Test
+    public void testSelectUserAndRoleById3(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            SysUser user=userMapper.selectUserAndRoleById3(1001l);
+            System.out.println(user.getRole().getRoleName());
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    //只允许查询一条，如果有多条符合条件的话会报错。
+    //使用了association标签,使用resultMap属性引用另一个配置文件中的roleMap 一对一映射
+    @Test
+    public void testSelectUserAndRoleById4(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            SysUser user=userMapper.selectUserAndRoleById4(1001l);
+            System.out.println(user.getRole().getRoleName());
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    //只允许查询一条，如果有多条符合条件的话会报错。
+    //使用了association标签。嵌套查询
+    @Test
+    public void testSelectUserAndRoleById5(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            SysUser user=userMapper.selectUserAndRoleById5(1001l);
+            System.out.println(user.getRole().getRoleName());
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    //只允许查询一条，如果有多条符合条件的话会报错。
+    //使用了association标签。嵌套查询
+    @Test
+    public void testSelectUserAndRoleById6(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            SysUser user=userMapper.selectUserAndRoleById6(1001l);
+            System.out.println("加载role");
+            System.out.println(user.getRole().getRoleName());
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+    //一对多查询 使用 collection
+    @Test
+    public void testSelectAllUserAndRoles(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            List<SysUser> users=userMapper.selectAllUserAndRoles();
+            System.out.println("users.size()="+users.size());
+            for(SysUser user:users){
+                System.out.println(user.getUserName());
+                System.out.println(user.getRoleList().size());
+            }
+            System.out.println();
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    //一对多查询 使用 collection
+    @Test
+    public void testSelectAllUserAndRoles2(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+            List<SysUser> users=userMapper.selectAllUserAndRoles2();
+            System.out.println("users.size()="+users.size());
+            for(SysUser user:users){
+                System.out.println(user.getUserName());
+                System.out.println(user.getRoleList().size());
+            }
+            System.out.println();
+
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
 }

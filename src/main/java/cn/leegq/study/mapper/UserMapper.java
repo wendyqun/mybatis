@@ -65,4 +65,28 @@ public interface UserMapper {
 
     //foreach 实现动态update
     public int updateByMap(Map<String,Object> map);
+
+    //sql一对一映射
+    public SysUser selectUserAndRoleById(Long id);
+
+    //使用了配置文件中resultMap的继承方式 一对一映射
+    public SysUser selectUserAndRoleById2(Long id);
+
+    //使用了association标签 一对一映射
+    public SysUser selectUserAndRoleById3(Long id);
+
+    //使用了association标签,使用resultMap属性引用另一个配置文件中的roleMap 一对一映射
+    public SysUser selectUserAndRoleById4(Long id);
+
+    //嵌套查询 发出两次sql查询
+    public SysUser selectUserAndRoleById5(Long id);
+
+    //嵌套查询,使用associaction的fetchType=lazy 发出两次sql查询
+    public SysUser selectUserAndRoleById6(Long id);
+
+    //一对多查询
+    public List<SysUser> selectAllUserAndRoles();
+
+    //一对多查询，用户-角色-权限 全部关联出
+    public List<SysUser> selectAllUserAndRoles2();
 }
