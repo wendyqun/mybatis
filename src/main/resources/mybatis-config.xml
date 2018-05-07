@@ -6,10 +6,17 @@
     <settings>
         <setting name="logImpl" value="LOG4J"/>
         <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="cacheEnabled" value="true"/>
     </settings>
     <typeAliases>
         <package name="cn.leegq.study.model"></package>
     </typeAliases>
+    <plugins>
+        <plugin interceptor="cn.leegq.study.ExecutorInterceptor" />
+        <plugin interceptor="cn.leegq.study.ParameterInterceptor" />
+        <plugin interceptor="cn.leegq.study.ResultSetInterceptor" />
+        <plugin interceptor="cn.leegq.study.StatementInterceptor" />
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC">
@@ -23,7 +30,6 @@
             </dataSource>
         </environment>
     </environments>
-
     <mappers>
         <!--<package name="cn.leegq.study.mapper"/>-->
         <mapper resource="cn/leegq/study/mapper/CountryMapper.xml"></mapper>
